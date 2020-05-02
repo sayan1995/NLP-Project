@@ -1,13 +1,55 @@
 import spacy
 
 from spacy_wordnet.wordnet_annotator import WordnetAnnotator
+from nltk.corpus import wordnet as wn
+
+def wordnet(token):
+    wordDict = {}
+    hypernymns = []
+    hyponyms = []
+    meronyms =[]
+    holonyms = []
+    synsets = wn.synsets(token)
+    for synset in synsets:
+            for h in synset.hypernyms():
+                for l in h.lemmas():
+                    hypernymns.append(l.name())
+            for h in synset.hyponyms():
+                for l in h.lemmas():
+                    hyponyms.append(l.name())
+            for h in synset.part_meronyms():
+                for l in h.lemmas():
+                    meronyms.append(l.name())
+            for h in synset.member_holonyms():
+                for l in h.lemmas():
+                    holonyms.append(l.name())
+
+    return wordDict
 
 def getLemma(token):
     token._.wordnet.lemmas()
     return token
 
 def getSynset(word):
+    synList = []
+    synsets = wn.synsets(word)
+    for synset in synsets:
+        for h in synset.hypernyms():
+            for l in h.lemmas():
+                synList.append(l.name())
+        for h in synset.hyponyms():
+            for l in h.lemmas():
+                synList.append(l.name())
+        for h in synset.part_meronyms():
+            for l in h.lemmas():
+                synList.append(l.name())
+        for h in synset.member_holonyms():
+            for l in h.lemmas():
+                synList.append(l.name())
 
+    return synList
+
+def spacySynset(word):
     nlp = spacy.load('en_core_web_sm')
     nlp.add_pipe(WordnetAnnotator(nlp.lang), after='tagger')
     token = nlp(word)[0]
