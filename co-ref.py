@@ -207,7 +207,7 @@ def co_ref(text):
     return finalText
 
 if __name__ == "__main__":
-
+    #co_ref('In May 2002, Musk founded SpaceX, an aerospace manufacturer and space transport services company, of which he is CEO and lead designer.')
     #nlp = spacy.load('en_core_web_sm')
    # neuralcoref.add_to_pipe(nlp)
     #co_ref('s')
