@@ -3,11 +3,15 @@ from nltk import pos_tag
 from nltk.tokenize import word_tokenize,sent_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet as wn
-f2 = open('ouput.txt', 'w')
+#from spacy import displacy 
+
+f2 = open('ouput1.txt', 'w')
 
 def dependency(sentences):
     print('----Dependency parsing----')
     nlp = spacy.load("en_core_web_sm")
+    #TODO
+    #Add
     sentenceDict = {}
     for sentence in sentences:
         doc = nlp(sentence)
@@ -16,6 +20,7 @@ def dependency(sentences):
             tokenDict[token] = [token.text, token.dep_, token.head.text, token.head.pos_,
                   [child for child in token.children]]
         sentenceDict[sentence] = tokenDict
+        #displacy.serve(doc, style="dep") 
     write('Dependency parsing', sentenceDict)
 
     return sentenceDict
