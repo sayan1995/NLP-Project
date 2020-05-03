@@ -1,6 +1,7 @@
 from nltk.corpus import wordnet as wn
 
-syn = wn.synsets('buy')[0]
+syn = wn.synsets('staff')
+print(syn)
 print ("Synset name :  ", syn.name())
 
 print ("\nSynset abstract term :  ", syn.hypernyms())

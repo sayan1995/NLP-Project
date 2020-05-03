@@ -1,12 +1,14 @@
 # Load your usual SpaCy model (one of SpaCy English models)
 import spacy
-from docx import Document
+#from docx import Document
 from spacy import displacy
 from spellchecker import SpellChecker
 import os
 import re
 import neuralcoref
 
+nlp = spacy.load('en_core_web_sm')
+neuralcoref.add_to_pipe(nlp)
 
 doc = ''
 
@@ -197,10 +199,8 @@ def preprocess(text):
     return text
 
 def co_ref(text):
-    nlp = spacy.load('en_core_web_sm')
-    neuralcoref.add_to_pipe(nlp)
+
     #nlp = spacy.load('en_core_web_sm')
-    neuralcoref.add_to_pipe(nlp)
     finalText = preprocess(text)
     finalText = processDoc(finalText)
     finalText = autoCorrect(finalText)
@@ -208,9 +208,9 @@ def co_ref(text):
 
 if __name__ == "__main__":
 
-    nlp = spacy.load('en_core_web_sm')
-    neuralcoref.add_to_pipe(nlp)
-
+    #nlp = spacy.load('en_core_web_sm')
+   # neuralcoref.add_to_pipe(nlp)
+    #co_ref('s')
     '''print(os.listdir())
     os.chdir('/Users/sayan/Documents/course/spring 2020/NLP/project/NLP-Project/WikipediaArticles')
     files = os.listdir()
