@@ -6,8 +6,7 @@ from spellchecker import SpellChecker
 import os
 import re
 import neuralcoref
-nlp = spacy.load('en_core_web_sm')
-neuralcoref.add_to_pipe(nlp)
+
 
 doc = ''
 
@@ -198,8 +197,8 @@ def preprocess(text):
     return text
 
 def co_ref(text):
-    import en_coref_md
-    nlp = en_coref_md.load()
+    nlp = spacy.load('en_core_web_sm')
+    neuralcoref.add_to_pipe(nlp)
     #nlp = spacy.load('en_core_web_sm')
     neuralcoref.add_to_pipe(nlp)
     finalText = preprocess(text)
@@ -211,7 +210,6 @@ if __name__ == "__main__":
 
     nlp = spacy.load('en_core_web_sm')
     neuralcoref.add_to_pipe(nlp)
-
 
     '''print(os.listdir())
     os.chdir('/Users/sayan/Documents/course/spring 2020/NLP/project/NLP-Project/WikipediaArticles')
@@ -231,7 +229,7 @@ if __name__ == "__main__":
             document.add_paragraph(finalText)
         document.save('/Users/sayan/Documents/course/spring 2020/NLP/project/NLP-Project/output' +str(file.replace('.txt','')) +'.docx')
     '''
-    co_ref(examples[0])
+    #co_ref(examples[0])
 
     #nlp = en_coref_md.load()
     '''patterns = [
